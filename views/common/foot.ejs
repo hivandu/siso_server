@@ -1,0 +1,22 @@
+<script src="/scripts/jquery-2.1.3.min.js"></script>
+<script src="/scripts/semantic.js"></script>
+<script src="/scripts/main.js"></script>
+<!-- loaded when need -->
+<% if (state.state == 'home') { %> <script src="/scripts/home.js"></script> <%}%>
+<% if (state.state == 'admin') { %> <script src="/scripts/admin.js"></script> <%}%>
+<% if (state.state == 'entry') { %>
+    <% if (state.richEditor) { %>
+        <script src="/scripts/bootstrap.js"></script>
+        <script src="/scripts/summernote.js"></script>
+    <% }%>
+
+    <script src="/scripts/entry.js"></script>
+<% }%>
+<% if (state.state == 'photo') { %>
+    <script src="/scripts/cropper.min.js"></script>
+    <script src="/scripts/dragula.js"></script>
+    <script src="/scripts/photo.js"></script>
+<%}%>
+<% if (state.state == 'user') { %> <script src="/scripts/user.js"></script> <%}%>
+<% if (state.state == 'user.login') { %> <script src="/scripts/login.js"></script> <%}%>
+<!-- end loaded when need -->

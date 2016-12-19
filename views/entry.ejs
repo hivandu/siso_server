@@ -1,0 +1,67 @@
+<% if (entry.title) { %>
+    <h1><%= title %></h1>
+<% } %>
+
+<% if (!entry.title) { %>
+    <% include common/tags.ejs %>
+<% } %>
+
+<div class="entry">
+    <form class="ui form" method="post" enctype="multipart/form-data" action="/entry">
+        <p class="ui fluid input big field">
+            <input type="text" name="entry_title" placeholder="主题" class="title" value="<%=entry.title%>"/>
+        </p>
+        <p class="field">
+            <% if (state.richEditor == true) { %>
+                <textarea id="summernote" name="entry_body" style="display: none"><%=entry.body%></textarea>
+            <% } else { %>
+                <textarea class="textarea" name="entry_body" placeholder="正文"><%=entry.body%></textarea>
+            <% }%>
+        </p>
+
+        <!-- if is case studies -->
+        <% if (state.column == 'case') { %>
+            <div class="ui two column doubling stackable grid container">
+                <div class="column field file">
+                    <span>HOME 首页图:</span>
+                    <input type="file" name="entry_home"/>
+                </div>
+                <div class="column field file">
+                    <span>HOME 首页图 Mobile:</span>
+                    <input type="file" name="entry_home_mobile"/>
+                </div>
+                <div class="column field file">
+                    <span>Case studies图:</span>
+                    <input type="file" name="entry_case"/>
+                </div>
+                <div class="column field file">
+                    <span>Case studies图 Mobile:</span>
+                    <input type="file" name="entry_case_mobile"/>
+                </div>
+                <div class="eight wide column field file inline">
+                    <span>HOME 首页色块颜色值:</span>
+                    <input type="text" name="entry_color" placeholder="输入rgb色值, 如: ff9900"/>
+                </div>
+                <div class="eight wide column field file inline">
+                    <span>HOME 首页文章按钮颜色值:</span>
+                    <input type="text" name="entry_btn_color" placeholder="输入rgb色值, 如: ff9900"/>
+                </div>
+                <div class="eight wide column field file">
+                    <span>详情页html文件索引:</span>
+                    <input type="number" name="entry_order" min="0" placeholder="详情页对应的order, 数字" style="width: 225px;" value="<%=entry.order%>" />
+                </div>
+            </div>
+        <% }%>
+        <p>
+            <button type="submit" class="ui button blue entry-submit">创建</button>
+        </p>
+        <input name="entry_type" type="hidden" value="<%= state.column %>"/>
+        <input name="entry_status" type="hidden" value="<%= state.status %>"/>
+        <input name="entry_date" type="hidden"/>
+        <% if (entry.id) { %>
+        <input name="entry_id" type="hidden" value="<%= entry.id %>"/>
+        <% } %>
+        <div class="ui error message"></div>
+    </form>
+</div>
+
